@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 import { 
   Container,
   Header,
@@ -11,17 +10,35 @@ import {
   LastTransaction
 } from './styles';
 
-export function HighlightCard() {
+interface HighlighCardProps {
+  type: 'up' | 'down' | 'total';
+  title: string;
+  amount: string;
+  lastTransaction: string;
+}
+
+const icon = {
+  up: 'arrow-up-circle',
+  down: 'arrow-down-circle',
+  total: 'dollar-sign'
+}
+
+export function HighlightCard({
+  type,
+  title,
+  amount,
+  lastTransaction,
+} : HighlighCardProps) {
   return (
-    <Container>
+    <Container type={type}>
       <Header>
-        <Title>Entrada</Title>
-        <Icon name="arrow-up-circle" />
+        <Title type={type}>{title}</Title>
+        <Icon name={icon[type]} type={type}/>
       </Header>
 
       <Footer>
-        <Amout>R$ 17.400,00</Amout>
-        <LastTransaction></LastTransaction>
+        <Amout type={type}>{amount}</Amout>
+        <LastTransaction type={type}>{lastTransaction}</LastTransaction>
       </Footer>
     </Container>
   )
