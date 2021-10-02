@@ -1,7 +1,11 @@
 import { Feather } from '@expo/vector-icons';
 import styled from 'styled-components/native';
+import { FlatList } from 'react-native'
+
 import { RFPercentage, RFValue } from 'react-native-responsive-fontsize';
-import { getStatusBarHeight } from 'react-native-iphone-x-helper';
+import { getBottomSpace, getStatusBarHeight } from 'react-native-iphone-x-helper';
+
+import {DataListProps} from './index'
 
 export const Status = styled.StatusBar``;
 
@@ -87,4 +91,7 @@ export const Title = styled.Text`
   font-family: ${({theme}) => theme.fonts.regular};
 `;
 
-export const TransactionList = styled.FlatList``;
+export const TransactionList = styled(FlatList as new () => FlatList<DataListProps>).attrs({
+  showsVerticalScrollIndicator: false,
+  contentContainerStyle: {paddingBottom: getBottomSpace()}
+})``;
