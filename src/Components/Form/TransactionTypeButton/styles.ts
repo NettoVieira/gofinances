@@ -25,12 +25,12 @@ export const Container = styled(TouchableOpacity)<ContainerProps>`
   padding: 16px;
 
   ${({isActive, type, theme}) => isActive && type === 'up' && css `
-    background-color: ${theme.colors.attention_light};
+    background-color: ${theme.colors.success_light};
     border: 0;
   `}
 
   ${({isActive, type, theme}) => isActive && type === 'down' && css `
-    background-color: ${theme.colors.success_light};
+    background-color: ${theme.colors.attention_light};
     border: 0;
   `}
 
