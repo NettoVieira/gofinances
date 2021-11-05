@@ -22,7 +22,8 @@ import {
   HighlightCards,
   Transactions,
   Title,
-  TransactionList
+  TransactionList,
+  LogoutButton
 } from './styles';
 
 export function Dashboard() {
@@ -73,7 +74,9 @@ export function Dashboard() {
               <UserName>João</UserName>
             </User>
           </UserInfo>
-          <Icon name="power"/>
+          <LogoutButton onPress={() => {}}>
+            <Icon name="power"/>
+          </LogoutButton>
         </UserWrapper>
       </Header>
 
