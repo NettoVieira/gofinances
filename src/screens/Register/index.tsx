@@ -64,7 +64,7 @@ export function Register() {
   }
   
   async function handleRegister(form: FormData) {
-    const data = {
+    const newTransaction = {
       name: form.name,
       amount: form.amount,
       transactionType,
@@ -72,8 +72,16 @@ export function Register() {
     }
     
     try {
+      const data = await AsyncStorage.getItem(dataKey);
 
-      await AsyncStorage.setItem(dataKey, JSON.stringify(data));
+      const currentData = data ? JSON.parse(data): []
+
+      const dataformatted = [
+        ...currentData,
+        newTransaction
+      ]
+      
+      await AsyncStorage.setItem(dataKey, JSON.stringify(dataformatted));
     } catch (error) {
       console.log(error)
       Alert.alert('Não foi possível salvar')
@@ -85,6 +93,8 @@ export function Register() {
       const data = await AsyncStorage.getItem(dataKey);
 
       console.log(JSON.parse(data!))
+
+      // await AsyncStorage.removeItem(dataKey);
     }
 
     getTransactions();
