@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import 'intl/locale-data/jsonp/pt-Br'
 import { Modal, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
 import { useForm } from 'react-hook-form'
 import * as Yup from 'yup'
@@ -78,7 +79,7 @@ export function Register() {
       amount: form.amount,
       transactionType,
       category: category.key,
-      date: new Date()
+      date: String(new Date())
     }
     
     try {
