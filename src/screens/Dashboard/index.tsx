@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+
+import React, { useState, useEffect, useCallback } from 'react';
 import { getBottomSpace } from 'react-native-iphone-x-helper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -26,6 +27,7 @@ import {
   TransactionList,
   LogoutButton
 } from './styles';
+import { useFocusEffect } from '@react-navigation/core';
 
 export function Dashboard() {
   const [data, setData] = useState<DataListProps[]>([])
@@ -36,6 +38,7 @@ export function Dashboard() {
     const response = await AsyncStorage.getItem(dataKey);
 
     const transactions = response ? JSON.parse(response) : [];
+
     console.log(transactions)
 
     const transactionsFormated: DataListProps[] = transactions.map((item: DataListProps) => {
@@ -44,22 +47,28 @@ export function Dashboard() {
         currency: 'BRL'
       })
 
+      const dateformated = new Intl.DateTimeFormat('pt-BR', {
+        day: '2-digit',
+        month: 'narrow',
+        year: 'numeric'
+      }).format(new Date(item.date))
+
       return {
         id: item.id,
         name: item.name,
         amount,
         type: item.type,
         category: item.category,
-        date: ''
+        date: dateformated
       }
     })
 
     setData(transactionsFormated)
   }
 
-  useEffect(() => {
-    loadTransaction();
-  }, [])
+  useFocusEffect(useCallback(() => {
+    loadTransaction()
+  }, []))
 
   return (
     <Container>

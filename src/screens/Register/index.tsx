@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import 'intl/locale-data/jsonp/pt-Br'
 import { Modal, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
 import { useForm } from 'react-hook-form'
 import * as Yup from 'yup'
